@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MainController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,30 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+
+
+
+Route::group(['middleware' => 'auth'], function (){
+    
+    Route::get('/home', [MainController::class, 'getpost']);
+
+    Route::get('/createpostpage', [MainController::class, 'createpostpage']);
+
+    Route::post('/unggah', [MainController::class, 'uploadpost']);
+
+    Route::get('/profile/{$id}', [MainController::class, 'profilepage']);
 });
+
+
+
+//Auth
+Route::get('/auth', [AuthController::class, 'loginpage']);
+
+Route::post('/login', [AuthController::class, 'login']);
+
+Route::get('/register', [AuthController::class, 'registerpage']);
+
+Route::post('/daftar', [AuthController::class, 'register']);
+
+Route::get('/logout', [AuthController::class, 'logout']);
