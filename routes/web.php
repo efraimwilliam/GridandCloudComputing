@@ -27,8 +27,18 @@ Route::group(['middleware' => 'auth'], function (){
 
     Route::post('/unggah', [MainController::class, 'uploadpost']);
 
-    Route::get('/profile/{$id}', [MainController::class, 'profilepage']);
+    Route::get('/profile/{id}', [MainController::class, 'profilepage']);
+
+    Route::put('/like/{id}', [MainController::class, 'like']);
+
+    //Route::get('/profilepost/{id}', [MainController::class, 'profilepost']);
+
+    Route::put('editprofile/{id}', [MainController::class, 'editprofile']);
+
+    
 });
+
+
 
 
 

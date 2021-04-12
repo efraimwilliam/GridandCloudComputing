@@ -12,4 +12,7 @@
 <link href="{{ asset('css/new.css') }}" rel="stylesheet">
 <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
 
+<script src="{{ asset('js/profile.js')}}"></script>
+<script src="{{ asset('js/profile2.js')}}"></script>
+
 <!------ Include the above in your HEAD tag ---------->

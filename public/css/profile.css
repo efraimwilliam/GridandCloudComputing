@@ -3,10 +3,10 @@ body {
     border-radius: 10px
 }
 
-.card {
+.cards {
     margin-top: 60px;
     margin-left: 100px;
-    position: fixed;
+    position: static;
     width: 400px;
     border: none;
     border-radius: 10px;

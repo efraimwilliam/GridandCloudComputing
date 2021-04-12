@@ -12,21 +12,24 @@
     </a>
 </div>
 
-
 @foreach ($post as $postakun)
     <div class="post1">
         <img src="mini1.png" alt="profile is here"
             height="40" width="40" /><br>
         <img src="{{$postakun->post}}" alt="doc is here"
             height="400" width="565" /><br><br>
-        <p6>Like</p6><br>
+        <p6>
+            <a href="/like/{$post->id}">Like</a>
+        </p6>
+        
+        <br>
         <hr>
         <p1>5</p1>
         <p2> and</p2>
         <p1> 5 others</p1>
         <p2> like this</p2>
         <div id="post2text" class="post1">
-            <p3>{{$postakun->userkepost->name}}</p3>
+            <p3><a href="/profilepost/{{$postakun->id_user}}">{{$postakun->userkepost->name}}</a></p3>
             <p2> </p2>
             <p1> </p1>
             <p2> </p2>
@@ -40,5 +43,6 @@
         </div>
     </div>
     @endforeach
+    
 </body>
 

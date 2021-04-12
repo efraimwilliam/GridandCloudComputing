@@ -17,12 +17,8 @@ class MainController extends Controller
 
     //get post in home
     public function getpost(){
-        //$post2 = DB::table('post')->select('id', 'id_user', 'post', 'desc', 'like', 'created_at')->get();
-
         $post= Post::all();
-        //$post2 = Post::find($id);
-        //return $post;
-        //dd($post);
+    
         return view('/home', compact('post'));
 
     }
@@ -55,25 +51,61 @@ class MainController extends Controller
 
     }
 
-    public function profilepage(){
-        //$profile = Post::get();
+    //profile page
+    public function profilepage($id){
+        $pro = User::all();
+        $pro2 = User::where('id', $id)->first();
+        $profile = Post::where('id_user', $id)->get();
+        $profiles = Post::where('id_user', $id )->count();
 
-        //$pro = Post::find();
-
-        //$jumlah = Post::count();
-        //return view('Profile', compact('profile'));
-        
-        //$profiles = Post::where('id')->count();
-
-        //$platinum = User::where('stripe_plan', 'platinum_monthly')->count();
-        //$profiles = Post::count();
-
-        //$count = Model::where('status','=','1')->count();
-
-        $profiles = Post::where('id_user', '$id' )->count();
         //dd($profiles);
-        return view('Profile', compact('profiles'));
+        return view('Profile', compact('profiles', 'profile', 'pro', 'pro2'));
     }
+
+
+    //profile post
+    public function profilepost($id){
+
+        //get all data
+        $profile = Post::where('id_user', $id)->get();
+
+        //get ammount post
+        $profiles = Post::where('id_user', $id )->count();
+
+        //get profile
+        $pro2 = User::where('id', $id)->first();
+
+        //dd($pro2);
+        return view('ProfilePost', compact('profile', 'profiles', 'pro2'));
+    }
+
+    public function editprofile(Request $request, $id){
+        $editprofile = Profile::where('id', $id)->first();
+
+        $editprofile->update([
+            'name' => $request->name,
+            'email' => $request->name,
+            'password' => $request->name,
+            'bio' => $request->name,
+        ]);
+
+        return redirect('/editprofile');
+    }
+
+
+
+
+    //like
+    public function like(Request $request, $id){
+        $like = Post::where('id', $id)->first();
+
+        $like->update([
+            'like' =>$request->like
+        ]);
+
+        return redirect('/home');
+    }
+
 
 }
 
