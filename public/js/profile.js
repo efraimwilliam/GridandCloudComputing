@@ -4,6 +4,12 @@ jQuery(document).ready(function($){
         jQuery('#btn-save').val("add");
         jQuery('#modalFormData').trigger("reset");
         jQuery('#linkEditorModal').modal('show');
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+            }
+        });
     });
 
     ////----- Open the modal to UPDATE a link -----////
@@ -14,7 +20,7 @@ jQuery(document).ready(function($){
             jQuery('#link').val(data.url);
             jQuery('#description').val(data.description);
 
-            jQuery('#name2').val(data.name2);
+            jQuery('#name').val(data.name);
             jQuery('#email').val(data.email);
             jQuery('#password').val(data.password);
             jQuery('#bio').val(data.bio);
@@ -24,28 +30,28 @@ jQuery(document).ready(function($){
         })
     });
 
+
+
     // Clicking the save button on the open modal for both CREATE and UPDATE
     $("#btn-save").click(function (e) {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
-            }
-        });
+
         e.preventDefault();
         var formData = {
-            name2: jQuery('#name2').val(),
+            name: jQuery('#name').val(),
             email: jQuery('#email').val(),
             password: jQuery('#password').val(),
             bio: jQuery('#bio').val(),
         };
-        var state = jQuery('#btn-save').val();
-        var type = "POST";
+        //var state = jQuery('#btn-save').val();
+        var type = "PUT";
         var link_id = jQuery('#name_id').val();
-        var ajaxurl = 'links';
-        if (state == "update") {
+        var ajaxurl = '/editprofile/'+link_id;
+
+        /*if (state == "update") {
             type = "PUT";
-            ajaxurl = '/editprofile/{id}' + link_id;
-        }
+            ajaxurl = '/editprofile'+link_id + link_id;
+        }*/
+
         $.ajax({
             type: type,
             url: ajaxurl,
@@ -54,6 +60,9 @@ jQuery(document).ready(function($){
             success: function (data) {
                 var link = '' + data.id + '' + data.name2 + '' + data.email + ''
                 + data.password + '' + data.bio + '';
+
+                alert('berhasil');
+                
                 link += 'Edit ';
                 link += 'Delete';
                 if (state == "add") {

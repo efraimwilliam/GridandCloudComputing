@@ -32,6 +32,7 @@
                     <h4 class="modal-title" id="linkEditorModalLabel">Edit Profile</h4>
                 </div>
                 <div class="modal-body">
+                    @csrf
                     <form id="modalFormData" name="modalFormData" class="form-horizontal" novalidate="">
 
                         <div class="form-group">
@@ -45,7 +46,7 @@
                         <div class="form-group">
                             <label for="inputLink" class="col-sm-2 control-label">Email</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="email" name="name"
+                                <input type="email" class="form-control" id="email" name="email"
                                        placeholder="Enter your Email" value="{{$pro2->email}}">
                             </div>
                         </div>
@@ -53,8 +54,8 @@
                         <div class="form-group">
                             <label for="inputLink" class="col-sm-2 control-label">Password</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="password" name="name"
-                                       placeholder="Enter your Passoword" value="">
+                                <input type="password" class="form-control" id="password" name="password"
+                                       placeholder="Enter your Password" value="">
                             </div>
                         </div>
 
@@ -70,7 +71,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" id="btn-save" value="add">Save changes
                     </button>
-                    <input type="hidden" id="name_id" name="name_id" value="0">
+                    <input type="hidden" id="name_id" name="name_id" value="{{$pro2->id}}">
                 </div>
             </div>
         </div>
@@ -82,7 +83,7 @@
 
 @foreach ($profile as $postakun)
     <div class="post1">
-        <img src="mini1.png" alt="profile is here"
+        <img src="" alt="profile is here"
             height="40" width="40" /><br>
         <img src="{{$postakun->post}}" alt="doc is here"
             height="400" width="565" /><br><br>

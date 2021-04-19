@@ -7,6 +7,7 @@ use DB;
 use App\Models\Post;
 use App\Models\User;
 use Auth;
+use Illuminate\Support\Facades\Hash;
 
 class MainController extends Controller
 {
@@ -31,6 +32,7 @@ class MainController extends Controller
     public function uploadpost(Request $request){
         $name = '';
 
+        //photo
         if($request->hasFile('post')){
             $image = $request->file('post');
             $name = 'test_'.time().'.'.$image->getClientOriginalExtension();
@@ -38,10 +40,12 @@ class MainController extends Controller
             $image->move($destinationPath, $name);
            
         }
+
         $uploadpost = Post::create([
             'id_user' =>Auth::id(),
             'post' => '/img/test/'.$name,
-            'desc'=> $request->desc
+            'desc'=> $request->desc,
+            'like'=>0
         ]);
 
 
@@ -80,29 +84,30 @@ class MainController extends Controller
     }
 
     public function editprofile(Request $request, $id){
-        $editprofile = Profile::where('id', $id)->first();
+        $editprofile = User::where('id', $id)->first();
 
         $editprofile->update([
             'name' => $request->name,
-            'email' => $request->name,
-            'password' => $request->name,
-            'bio' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'bio' => $request->bio
         ]);
 
-        return redirect('/editprofile');
+        //dd($editprofile);
+        return redirect('/home');
     }
 
 
 
-
     //like
-    public function like(Request $request, $id){
+    public function like($id){
         $like = Post::where('id', $id)->first();
-
+        
         $like->update([
-            'like' =>$request->like
+            'like' => $like->like + 1
         ]);
-
+        
+        //dd($like);
         return redirect('/home');
     }
 
