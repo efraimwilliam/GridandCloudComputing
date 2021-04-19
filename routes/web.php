@@ -36,6 +36,20 @@ Route::group(['middleware' => 'auth'], function (){
     Route::put('/editprofile/{id}', [MainController::class, 'editprofile']);
 
     Route::put('/like/{id}', [MainController::class, 'like']);
+    
+    Route::put('/like2/{id}', [MainController::class, 'like']);
+
+    Route::get('/newhome', [MainController::class, 'newhomepage']);
+
+
+
+    Route::get('/group1', [MainController::class, 'group1']);
+
+
+    
+    Route::get('/group2', [MainController::class, 'group2']);
+    Route::get('/createpostpage2', [MainController::class, 'createpostpage2']);
+    Route::post('/unggah2', [MainController::class, 'uploadpost2']);
 
 });
 

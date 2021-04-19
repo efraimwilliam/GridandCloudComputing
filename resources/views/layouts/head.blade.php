@@ -14,6 +14,7 @@
 
 
 <link href="{{ asset('css/dashboard2.css') }}" rel="stylesheet">
+<link href="{{ asset('css/menu.css') }}" rel="stylesheet">
 <link href="{{ asset('css/new.css') }}" rel="stylesheet">
 <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
 

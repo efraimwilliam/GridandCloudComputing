@@ -11,7 +11,7 @@
                 <h4 class="mb-0 mt-0">{{Auth::user()->name}}</h4> <span>{{$pro2->bio}}</span>
                 <div class="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats">
                     <div class="d-flex flex-column"> <span class="articles">Post</span> <span class="number1">{{$profiles}}</span> </div>
-                    <div class="d-flex flex-column"> <span class="followers">Like</span> <span class="number2">980</span> </div>
+                    <div class="d-flex flex-column"> <span class="followers">Like</span> <span class="number2">{{$count}}</span> </div>
                     <div class="d-flex flex-column"> <span class="rating"></span> <span class="number3"></span> </div>
                 </div>
                 <div class="buttons mt-2 d-flex flex-row align-items-center"> 
@@ -87,16 +87,19 @@
             height="40" width="40" /><br>
         <img src="{{$postakun->post}}" alt="doc is here"
             height="400" width="565" /><br><br>
+
+            <p3>{{$postakun->desc}}</p3><br><br>
+            
         <p6>
             <a href="/like/{$post->id}">Like</a>
         </p6>
         
         <br>
         <hr>
-        <p1>5</p1>
-        <p2> and</p2>
-        <p1> 5 others</p1>
-        <p2> like this</p2>
+        <p1>{{$postakun->like}}</p1>
+        <p2> Like This Post</p2>
+        <p1> </p1>
+        <p2> </p2>
         <div id="post2text" class="post1">
             <p3>{{$postakun->userkepost->name}}</p3>
             <p2> </p2>
