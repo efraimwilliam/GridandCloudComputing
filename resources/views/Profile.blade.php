@@ -35,6 +35,17 @@
                     @csrf
                     <form id="modalFormData" name="modalFormData" class="form-horizontal" novalidate="">
 
+                    <div class="form-group">
+                            <label for="inputLink" class="col-sm-2 control-label">Photo</label>
+                            <div class="col-sm-10">
+                            <img src="" alt="profile is here" height="250" width="250"/>
+
+                                <input type="file" id="profile" name="profile" value="">
+                        
+                            
+                            </div>
+                        </div>
+                        
                         <div class="form-group">
                             <label for="inputLink" class="col-sm-2 control-label">Name</label>
                             <div class="col-sm-10">
@@ -90,9 +101,15 @@
 
             <p3>{{$postakun->desc}}</p3><br><br>
             
-        <p6>
-            <a href="/like/{$post->id}">Like</a>
+            <p6>
+                <form action ="/like/{{$postakun->id}}" method='POST'>
+                    @csrf
+                    @method('PUT')
+                        <button type="submit" class="btn btn-primary btn-sm">Like</button>
+                </form>
+            
         </p6>
+        
         
         <br>
         <hr>
@@ -100,19 +117,45 @@
         <p2> Like This Post</p2>
         <p1> </p1>
         <p2> </p2>
-        <div id="post2text" class="post1">
-            <p3>{{$postakun->userkepost->name}}</p3>
-            <p2> </p2>
-            <p1> </p1>
-            <p2> </p2>
-            <p1> </p1><br>
-            <p4>{{$postakun->created_at}}</p4>
+
+
+        <div class="nama">
+            <div id="post2text" class="post1">
+                <p3>{{$postakun->userkepost->name}}</p3>
+                <p2> </p2>
+                <p1> </p1>
+                <p2> </p2>
+                <p1>   
+                    <br>
+                <p4>{{$postakun->created_at}}</p4>
+            </div>
         </div>
 
-        <div id="commentboxpos2" class="post1">
-            <input type="text" placeholder="comment"
-                id="commentbox" />
+        <div class="togle">
+        <form action="/hapuspost/{{$postakun->id}}" method="POST">
+                      @csrf
+                      @method('DELETE')            
+                <div class="btn-ak">
+                    <button type="button" class="btn dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu">
+                        <button href='{{$postakun->id}}' class="dropdown-item" href="/hapuspost">Delete Post</a>
+                    </div>
+                </div>
+            </form>
         </div>
+            
+        <form action="/comment/{{$postakun->id}}" method="POST">
+        @csrf
+            <div id="commentboxpos2" class="post1">
+                <input type="text" placeholder="comment" id="commentbox" name="comment"/>
+            </div>
+
+            <div class = "commentkuy">
+                <button type="submit" class="btn btn-success btn-group-sm">></button>
+            </div>
+        </form>
     </div>
     @endforeach
     

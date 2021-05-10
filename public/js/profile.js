@@ -24,6 +24,7 @@ jQuery(document).ready(function($){
             jQuery('#email').val(data.email);
             jQuery('#password').val(data.password);
             jQuery('#bio').val(data.bio);
+            jQuery('#profile').val(data.profile);
 
             jQuery('#btn-save').val("update");
             jQuery('#linkEditorModal').modal('show');
@@ -41,6 +42,7 @@ jQuery(document).ready(function($){
             email: jQuery('#email').val(),
             password: jQuery('#password').val(),
             bio: jQuery('#bio').val(),
+            profile: jQuery('#profile').val(),
         };
         //var state = jQuery('#btn-save').val();
         var type = "PUT";
@@ -59,7 +61,7 @@ jQuery(document).ready(function($){
             dataType: 'json',
             success: function (data) {
                 var link = '' + data.id + '' + data.name2 + '' + data.email + ''
-                + data.password + '' + data.bio + '';
+                + data.password + '' + data.bio + '' + data.profile + '';
 
                 alert('berhasil');
                 

@@ -29,6 +29,18 @@ Route::group(['middleware' => 'auth'], function (){
 
     Route::get('/profile/{id}', [MainController::class, 'profilepage']);
 
+    //Hapus Profile post
+    Route::delete('hapuspost/{id}', [MainController::class,'deleteprofilepost']);
+
+
+    Route::get('/commentinfo/{id}', [MainController::class, 'commentpage']);
+
+    Route::post('/comment/{id}', [MainController::class, 'comment']);
+
+    Route::post('/commentcomment/{id}', [MainController::class, 'commentcomment']);
+    
+
+
     Route::put('/like/{id}', [MainController::class, 'like']);
 
     Route::get('/profilepost/{id}', [MainController::class, 'profilepost']);
@@ -37,7 +49,7 @@ Route::group(['middleware' => 'auth'], function (){
 
     Route::put('/like/{id}', [MainController::class, 'like']);
     
-    Route::put('/like2/{id}', [MainController::class, 'like']);
+    Route::put('/like2/{id}', [MainController::class, 'like2']);
 
     Route::get('/newhome', [MainController::class, 'newhomepage']);
 

@@ -8,7 +8,7 @@
 </div>
 
 @foreach ($post as $postakun)
-    <div class="post1">
+    <div class="postcomment">
         <img src="mini1.png" alt="profile is here"
             height="40" width="40" /><br>
         <img src="{{$postakun->post}}" alt="doc is here"
@@ -50,7 +50,7 @@
             </div>
         </div>
 
-        <form action="/comment/{{$postakun->id}}" method="POST">
+        <form action="/commentcomment/{{$postakun->id}}" method="POST">
         @csrf
             <div id="commentboxpos2" class="post1">
                 <input type="text" placeholder="comment" id="commentbox" name="comment"/>
@@ -61,6 +61,23 @@
             </div>
         </form>
 
+
+        @foreach ($comment2 as $comment)
+            <img src="mini1.png" alt="profile is here"
+            height="40" width="40" /><br>
+
+
+            <div class="namacomment">
+            <div id="post2text" class="post1">
+                <p3><a href="/profilepost/{{$comment->id_user}}">{{$comment->commentkeuser->name}}</a></p3>
+                <p2> {{$comment->comment}}</p2>
+                <p1> </p1>
+                <p2> </p2>
+                <p1> </p1>
+            </div>
+        </div>
+
+        @endforeach
         
 
     </div>

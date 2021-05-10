@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use App\Models\Comment;
 use App\Models\Post;
 use App\Models\Post2;
 use App\Models\User;
@@ -37,11 +38,21 @@ class MainController extends Controller
         $pro = User::all();
         $pro2 = User::where('id', $id)->first();
         $profile = Post::where('id_user', $id)->get();
+        $profilefirst = Post::where('id_user', $id)->first();
         $profiles = Post::where('id_user', $id )->count();
         $count = Post::where('id_user', $id)->sum('like');
 
-        //dd($count);
-        return view('Profile', compact('profiles', 'profile', 'pro', 'pro2', 'count'));
+        //dd($profile);
+        return view('Profile', compact('profiles', 'profile', 'pro', 'pro2', 'count', 'profilefirst'));
+    }
+
+    //delete post in profile person
+    public function deleteprofilepost($id){
+        $post = Post::where('id', $id)->first();
+        
+        $post->delete();
+
+        return redirect('/profile/{id}');
     }
 
 
@@ -66,17 +77,31 @@ class MainController extends Controller
 
     public function editprofile(Request $request, $id){
         $editprofile = User::where('id', $id)->first();
+        $name = '';
+
+        //photo profile
+        if($request->hasFile('profile')){
+            $image = $request->file('profile');
+            $name = 'profile_'.time().'.'.$image->getClientOriginalExtension();
+            $destinationPath = public_path('/img/profile');
+            $image->move($destinationPath, $name);
+           
+        }
+       
 
         $editprofile->update([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'bio' => $request->bio
+            'bio' => $request->bio,
+            'profile' => '/img/profile/'.$name
+            
         ]);
 
         //dd($editprofile);
         return redirect('/home');
     }
+
 
 
 
@@ -92,9 +117,47 @@ class MainController extends Controller
         return redirect('/group1');
     }
 
+    //comment page
+    public function commentpage($id){
+       // $post = Post::find($id);
+        $post = Post::where('id', $id)->get();
+
+        $comment = Comment::find($id);
+
+        $comment2 = Comment::where('id_post', $id)->get();
+
+        //dd($post);
+        return view('Comment', compact('comment2', 'post'));
+        
+    }
+
+    //comment
+    public function comment(Request $request, $id){ 
+        
+        $comment = Comment::create([
+            'id_user' => Auth::id(),
+            'id_post' => $id,
+            'comment' => $request->comment
+        ]);
+
+        return redirect('/group1');
+    }
+
+    //commentcomment
+    public function commentcomment(Request $request, $id){ 
+
+        $comment = Comment::create([
+            'id_user' => Auth::id(),
+            'id_post' => $id,
+            'comment' => $request->comment
+        ]);
+
+        return redirect('/comment/{id}');
+    }
+
     //like for profile person
     public function like2($id){
-        $like = Post::where('id', $id)->first();
+        $like = Post2::where('id', $id)->first();
             
         $like->update([
             'like' => $like->like + 1
@@ -138,7 +201,7 @@ class MainController extends Controller
         ]);
 
         //dd($uploadpost);
-        return redirect('/home');
+        return redirect('/group1');
 
     }
 

@@ -49,13 +49,15 @@
         <p1> </p1>
         <p2> </p2>
 
-        <div id="post2text" class="post1">
-            <p3><a href="/profilepost/{{$postakun->id_user}}">{{$postakun->userkepost->name}}</a></p3>
-            <p2> </p2>
-            <p1> </p1>
-            <p2> </p2>
-            <p1> </p1><br>
-            <p4>{{$postakun->created_at}}</p4>
+        <div class="nama">
+            <div id="post2text" class="post1">
+                <p3><a href="/profilepost/{{$postakun->id_user}}">{{$postakun->userkepost->name}}</a></p3>
+                <p2> </p2>
+                <p1> </p1>
+                <p2> </p2>
+                <p1> </p1><br>
+                <p4>{{$postakun->created_at}}</p4>
+            </div>
         </div>
 
         <div id="commentboxpos2" class="post1">

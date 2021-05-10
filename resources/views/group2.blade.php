@@ -17,7 +17,7 @@
 
             <p3>{{$postakun->desc}}</p3><br><br>
         <p6>
-            <form action ="/like/{{$postakun->id}}" method='POST'>
+            <form action ="/like2/{{$postakun->id}}" method='POST'>
             @csrf
             @method('PUT')
                 <button type="submit" class="btn btn-primary btn-sm">Like</button>
