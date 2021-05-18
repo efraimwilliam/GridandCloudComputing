@@ -7,6 +7,7 @@
     </a>
 </div>
 
+
 @foreach ($post as $postakun)
     <div class="postcomment">
         <img src="mini1.png" alt="profile is here"

@@ -16,10 +16,13 @@
                     <div class="d-flex flex-column"> <span class="followers">Like</span> <span class="number2">{{$count}}</span> </div>
                     <div class="d-flex flex-column"> <span class="rating"></span> <span class="number3"></span> </div>
                 </div>
-                <div class="buttons mt-2 d-flex flex-row align-items-center"> 
-                    <button class="btn btn-sm btn-outline-primary w-100">Chat</button> 
-                    <button class="btn btn-sm btn-primary w-100 ml-2">Follow</button> 
-                </div>
+                <form action="/follow/{{$pro2->id}}">
+                @csrf
+                    <div class="buttons mt-2 d-flex flex-row align-items-center"> 
+                        <button class="btn btn-sm btn-outline-primary w-100">Chat</button> 
+                        <button class="btn btn-sm btn-primary w-100 ml-2">Follow</button>    
+                    </div>
+                </form> 
             </div>
         </div>
     </div>
@@ -35,12 +38,19 @@
 
             <p3>{{$postakun->desc}}</p3><br><br>
         <p6>
-            <form action ="/like2/{{$postakun->id}}" method='POST'>
+            <form action ="/likeprofilepost/{{$postakun->id}}" method='POST'>
             @csrf
             @method('PUT')
                 <button type="submit" class="btn btn-primary btn-sm">Like</button>
             </form>
         </p6>
+
+        <p2>
+            <div class="commentgas">
+                <a href="/commentinfo/{{$postakun->id}}">
+                    <button type="submit" class="btn btn-primary btn-sm">Comment</button>
+            </div>
+        </p2>
         
         
         <hr>
@@ -60,9 +70,17 @@
             </div>
         </div>
 
-        <div id="commentboxpos2" class="post1">
-            <input type="text" placeholder="comment"
-                id="commentbox" />
+        <form action="/comment/{{$postakun->id}}" method="POST">
+        @csrf
+            <div id="commentboxpos2" class="post1">
+                <input type="text" placeholder="comment" id="commentbox" name="comment"/>
+            </div>
+
+            <div class = "commentkuy">
+                <button type="submit" class="btn btn-success btn-group-sm">></button>
+            </div>
+
+        </form>
         </div>
     </div>
     <br><br><br>

@@ -38,7 +38,19 @@ Route::group(['middleware' => 'auth'], function (){
     Route::post('/comment/{id}', [MainController::class, 'comment']);
 
     Route::post('/commentcomment/{id}', [MainController::class, 'commentcomment']);
+
+
+
+    Route::get('/commentinfo2/{id}', [MainController::class, 'commentpage2']);
+
+    Route::post('/comment2/{id}', [MainController::class, 'comment2']);
+
+    Route::post('/commentcomment2/{id}', [MainController::class, 'commentcomment2']);
     
+
+    Route::get('/following/{id}', [MainController::class, 'followingpage']);
+
+    Route::get('follow/{id}', [MainController::class, 'follow']);
 
 
     Route::put('/like/{id}', [MainController::class, 'like']);
@@ -48,6 +60,8 @@ Route::group(['middleware' => 'auth'], function (){
     Route::put('/editprofile/{id}', [MainController::class, 'editprofile']);
 
     Route::put('/like/{id}', [MainController::class, 'like']);
+
+    Route::put('/likeprofilepost/{id}', [MainController::class, 'likeprofilepost']);
     
     Route::put('/like2/{id}', [MainController::class, 'like2']);
 

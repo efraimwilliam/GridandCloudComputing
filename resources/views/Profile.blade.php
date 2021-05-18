@@ -107,8 +107,13 @@
                     @method('PUT')
                         <button type="submit" class="btn btn-primary btn-sm">Like</button>
                 </form>
-            
         </p6>
+        <p2>
+            <div class="commentgas">
+                <a href="/commentinfo/{{$postakun->id}}">
+                    <button type="submit" class="btn btn-primary btn-sm">Comment</button>
+            </div>
+        </p2>
         
         
         <br>

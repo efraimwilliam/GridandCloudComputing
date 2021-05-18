@@ -17,6 +17,7 @@
 <link href="{{ asset('css/menu.css') }}" rel="stylesheet">
 <link href="{{ asset('css/new.css') }}" rel="stylesheet">
 <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
+<link href="{{ asset('css/following.css') }}" rel="stylesheet">
 
 <script src="{{ asset('js/profile.js')}}"></script>
 

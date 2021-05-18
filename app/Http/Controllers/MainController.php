@@ -8,6 +8,7 @@ use App\Models\Comment;
 use App\Models\Post;
 use App\Models\Post2;
 use App\Models\User;
+use App\Models\Following;
 use Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -42,7 +43,7 @@ class MainController extends Controller
         $profiles = Post::where('id_user', $id )->count();
         $count = Post::where('id_user', $id)->sum('like');
 
-        //dd($profile);
+        //dd($pro2);
         return view('Profile', compact('profiles', 'profile', 'pro', 'pro2', 'count', 'profilefirst'));
     }
 
@@ -107,6 +108,7 @@ class MainController extends Controller
 
     //like for home
     public function like($id){
+        $like2 = Post::where('id', $id)->first();
         $like = Post::where('id', $id)->first();
         
         $like->update([
@@ -115,36 +117,60 @@ class MainController extends Controller
         
         //dd($like);
         return redirect('/group1');
+        //return redirect()->action([MainController::class, 'profilepost'], ['id' => $like2->id]);
     }
+
+    //like for profilepost
+    public function likeprofilepost($id){
+        $like2 = Post::where('id', $id)->first();
+        $like = Post::where('id', $id)->first();
+        
+        $like->update([
+            'like' => $like->like + 1
+        ]);
+        
+        //dd($like);
+        //return redirect('/group1');
+        return redirect()->action([MainController::class, 'profilepost'], ['id' => $like2->id]);
+    }
+
+
 
     //comment page
     public function commentpage($id){
-       // $post = Post::find($id);
+        
         $post = Post::where('id', $id)->get();
+
+        $post2 = Post::where('id', $id)->get();
 
         $comment = Comment::find($id);
 
-        $comment2 = Comment::where('id_post', $id)->get();
+        $comment2 = Comment::where('id_post', $id)->where('group', 1)->get();
 
-        //dd($post);
-        return view('Comment', compact('comment2', 'post'));
+        //dd($comment2);
+        return view('Comment', compact('comment2', 'post', 'comment'));
         
     }
 
     //comment
     public function comment(Request $request, $id){ 
         
+        $comment2 = Post2::where('id', $id)->first();
+
         $comment = Comment::create([
             'id_user' => Auth::id(),
             'id_post' => $id,
-            'comment' => $request->comment
+            'comment' => $request->comment,
+            'group' => 1
         ]);
 
-        return redirect('/group1');
+        //return redirect('/group1');
+        return redirect()->action([MainController::class, 'commentpage'], ['id' => $comment2->id]);
     }
 
     //commentcomment
     public function commentcomment(Request $request, $id){ 
+        $commentcomment = Post::where('id', $id)->first();
 
         $comment = Comment::create([
             'id_user' => Auth::id(),
@@ -152,11 +178,58 @@ class MainController extends Controller
             'comment' => $request->comment
         ]);
 
-        return redirect('/comment/{id}');
+        //return redirect('/comment/{id}');
+        return redirect()->action([MainController::class, 'commentpage'], ['id' => $commentcomment->id]);
     }
+
+
+    //comment page 2
+    public function commentpage2($id){
+        
+        $post = Post2::where('id', $id)->get();
+
+        $comment = Comment::find($id);
+
+        $comment2 = Comment::where('id_post', $id)->where('group', 2)->get();
+
+        //dd($post);
+        return view('Comment', compact('comment2', 'post'));
+        
+    }
+
+    //comment page 2
+    public function comment2(Request $request, $id){ 
+        $comment2 = Post2::where('id', $id)->first();
+
+        $comment = Comment::create([
+            'id_user' => Auth::id(),
+            'id_post' => $id,
+            'comment' => $request->comment,
+            'group' => 2
+        ]);
+
+        //return redirect('/group2');
+        return redirect()->action([MainController::class, 'commentpage2'], ['id' => $comment2->id]);
+    }
+
+    //commentcomment page2
+    public function commentcomment2(Request $request, $id){ 
+        $commentcomment2 = Post2::where('id', $id)->first();
+
+        $comment = Comment::create([
+            'id_user' => Auth::id(),
+            'id_post' => $id,
+            'comment' => $request->comment
+        ]);
+
+        //return redirect('/comment/{id}');
+        return redirect()->action([MainController::class, 'commentpage2'], ['id' => $commentcomment2->id]);
+    }
+
 
     //like for profile person
     public function like2($id){
+        $like2 = Post2::where('id', $id)->first();
         $like = Post2::where('id', $id)->first();
             
         $like->update([
@@ -164,7 +237,30 @@ class MainController extends Controller
         ]);
             
         //dd($like);
-        return redirect('/profile/{id}');
+        return redirect('/group2');
+        //return redirect()->action([MainController::class, 'profilepost'], ['id' => $like2->id]);
+    }
+
+    //following
+    public function followingpage($id){
+        //$following = Following::where('id_user', $id)->get();
+
+        //return view('Following', compact('following'));
+        return view('Following');
+    }
+
+    //follow button
+    public function follow(Request $request, $id){
+        $profileperson = User::where('id', $id)->first();
+
+        $follow = Following::create([
+            'id_user' => Auth::id(),
+            'follow' => $profileperson->id
+        ]);
+        
+        //echo('success');
+        //return redirect('/home');
+        return redirect()->action([MainController::class, 'profilepost'], ['id' => $profileperson->id]);
     }
 
     //get post group 1

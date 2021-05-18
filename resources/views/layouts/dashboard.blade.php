@@ -24,7 +24,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link sidesthrd" href="/">
+          <a class="nav-link sidesthrd" href="/following/{{Auth::user()->id}}">
             <span class="textside">  List</span>
           </a>
         </li>
