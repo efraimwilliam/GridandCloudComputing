@@ -6,9 +6,9 @@
 <div class="container mt-5 d-flex justify-content-center">
     <div class="cards p-3">
         <div class="d-flex align-items-center">
-            <div class="image"> <img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80" class="rounded" width="155"> </div>
+            <div class="image"> <img src="{{asset(Auth::user()->profile)}}" class="rounded" width="155"> </div>
             <div class="ml-3 w-100">
-                <h4 class="mb-0 mt-0">{{Auth::user()->name}}</h4> <span>{{$pro2->bio}}</span>
+                <h4 class="mb-0 mt-0" id= "nama-namanya">{{Auth::user()->name}}</h4> <span>{{$pro2->bio}}</span>
                 <div class="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats">
                     <div class="d-flex flex-column"> <span class="articles">Post</span> <span class="number1">{{$profiles}}</span> </div>
                     <div class="d-flex flex-column"> <span class="followers">Like</span> <span class="number2">{{$count}}</span> </div>
@@ -33,12 +33,12 @@
                 </div>
                 <div class="modal-body">
                     @csrf
-                    <form id="modalFormData" name="modalFormData" class="form-horizontal" novalidate="">
+                    <form id="form-update" name="modalFormData" class="form-horizontal" novalidate="">
 
                     <div class="form-group">
                             <label for="inputLink" class="col-sm-2 control-label">Photo</label>
                             <div class="col-sm-10">
-                            <img src="" alt="profile is here" height="250" width="250"/>
+                            <img src="{{asset(Auth::user()->profile)}}" alt="profile is here" height="250" width="250" id="profileplace"/>
 
                                 <input type="file" id="profile" name="profile" value="">
                         
@@ -49,7 +49,7 @@
                         <div class="form-group">
                             <label for="inputLink" class="col-sm-2 control-label">Name</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="name" name="name"
+                                <input type="text" class="form-control" id="nameprofile" name="nameprofile"
                                        placeholder="Enter your name" value="{{Auth::user()->name}}">
                             </div>
                         </div>
@@ -77,13 +77,14 @@
                                        placeholder="Enter your Bio" value="{{$pro2->bio}}">
                             </div>
                         </div>
-                    </form>
+                    
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="btn-save" value="add">Save changes
+                    <button type="submit" class="btn btn-primary" id="btn-save" value="add">Save changes
                     </button>
                     <input type="hidden" id="name_id" name="name_id" value="{{$pro2->id}}">
                 </div>
+                </form>
             </div>
         </div>
     </div>

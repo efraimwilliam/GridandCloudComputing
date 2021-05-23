@@ -57,7 +57,7 @@ Route::group(['middleware' => 'auth'], function (){
 
     Route::get('/profilepost/{id}', [MainController::class, 'profilepost']);
 
-    Route::put('/editprofile/{id}', [MainController::class, 'editprofile']);
+    Route::post('/editprofile/{id}', [MainController::class, 'editprofile']);
 
     Route::put('/like/{id}', [MainController::class, 'like']);
 

@@ -80,6 +80,8 @@ class MainController extends Controller
         $editprofile = User::where('id', $id)->first();
         $name = '';
 
+        //dd($request);
+
         //photo profile
         if($request->hasFile('profile')){
             $image = $request->file('profile');
@@ -91,16 +93,16 @@ class MainController extends Controller
        
 
         $editprofile->update([
-            'name' => $request->name,
+            'name' => $request->nameprofile,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'bio' => $request->bio,
-            'profile' => '/img/profile/'.$name
+            'profile' => 'img/profile/'.$name
             
         ]);
 
-        //dd($editprofile);
-        return redirect('/home');
+        
+        return response('success');
     }
 
 
