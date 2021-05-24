@@ -13,7 +13,7 @@ class AuthController extends Controller
     //Login Page
     public function loginpage(){
 
-        return view('/auth');
+        return view('/');
     }
 
 
