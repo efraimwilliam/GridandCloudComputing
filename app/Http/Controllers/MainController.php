@@ -190,7 +190,8 @@ class MainController extends Controller
         $comment = Comment::create([
             'id_user' => Auth::id(),
             'id_post' => $id,
-            'comment' => $request->comment
+            'comment' => $request->comment,
+            'group' => 1
         ]);
 
         //return redirect('/comment/{id}');
@@ -234,7 +235,8 @@ class MainController extends Controller
         $comment = Comment::create([
             'id_user' => Auth::id(),
             'id_post' => $id,
-            'comment' => $request->comment
+            'comment' => $request->comment,
+            'group' => 2
         ]);
 
         //return redirect('/comment/{id}');
