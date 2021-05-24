@@ -20,7 +20,7 @@ class Following extends Model
     //one to many inverse relationship
     public function followingkeuser(){
         //return $this->belongsTo(User::class, 'id_user');
-        return $this->belongsTo(User::class, 'id_user');
+        return $this->belongsTo(User::class, 'follow');
     }
 
 }

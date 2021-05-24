@@ -43,8 +43,14 @@ class MainController extends Controller
         $profiles = Post::where('id_user', $id )->count();
         $count = Post::where('id_user', $id)->sum('like');
 
+        $profile2 = Post2::where('id_user', $id)->get();
+        $profilefirst2 = Post2::where('id_user', $id)->first();
+        $profiles2 = Post2::where('id_user', $id )->count();
+        $count2 = Post2::where('id_user', $id)->sum('like');
+
         //dd($pro2);
-        return view('Profile', compact('profiles', 'profile', 'pro', 'pro2', 'count', 'profilefirst'));
+        return view('Profile', compact('profiles', 'profile', 'pro', 'pro2', 'count', 'profilefirst'
+                                        ,'profile2', 'profilefirst2', 'profiles2', 'count2'));
     }
 
     //delete post in profile person
@@ -72,15 +78,22 @@ class MainController extends Controller
         //get amount like
         $count = Post::where('id_user', $id)->sum('like');
 
+
+        $profile2 = Post2::where('id_user', $id)->get();
+        $profilefirst2 = Post2::where('id_user', $id)->first();
+        $profiles2 = Post2::where('id_user', $id )->count();
+        $count2 = Post2::where('id_user', $id)->sum('like');
+
         //dd($pro2);
-        return view('ProfilePost', compact('profile', 'profiles', 'pro2', 'count'));
+        return view('ProfilePost', compact('profile', 'profiles', 'pro2', 'count'
+                                            , 'profile2', 'profilefirst2', 'profiles2', 'count2'));
     }
 
     public function editprofile(Request $request, $id){
         $editprofile = User::where('id', $id)->first();
         $name = '';
 
-        //dd($request);
+        //dd($editprofile);
 
         //photo profile
         if($request->hasFile('profile')){
@@ -245,10 +258,14 @@ class MainController extends Controller
 
     //following
     public function followingpage($id){
-        //$following = Following::where('id_user', $id)->get();
+        $following = Following::where('id_user', $id)->get();
+        $numberfollowing = Following::where('id_user', $id )->count();
+
 
         //return view('Following', compact('following'));
-        return view('Following');
+
+        //dd($numberfollowing);
+        return view('Following', compact('following', 'numberfollowing'));
     }
 
     //follow button

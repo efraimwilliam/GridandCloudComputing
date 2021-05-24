@@ -95,7 +95,79 @@
 
 @foreach ($profile as $postakun)
     <div class="post1">
-        <img src="" alt="profile is here"
+        <img src="{{asset(Auth::user()->profile)}}" alt="profile is here"
+            height="40" width="40" /><br>
+        <img src="{{$postakun->post}}" alt="doc is here"
+            height="400" width="565" /><br><br>
+
+            <p3>{{$postakun->desc}}</p3><br><br>
+            
+            <p6>
+                <form action ="/like/{{$postakun->id}}" method='POST'>
+                    @csrf
+                    @method('PUT')
+                        <button type="submit" class="btn btn-primary btn-sm">Like</button>
+                </form>
+        </p6>
+        <p2>
+            <div class="commentgas">
+                <a href="/commentinfo/{{$postakun->id}}">
+                    <button type="submit" class="btn btn-primary btn-sm">Comment</button>
+            </div>
+        </p2>
+        
+        
+        <br>
+        <hr>
+        <p1>{{$postakun->like}}</p1>
+        <p2> Like This Post</p2>
+        <p1> </p1>
+        <p2> </p2>
+
+
+        <div class="nama">
+            <div id="post2text" class="post1">
+                <p3>{{$postakun->userkepost->name}}</p3>
+                <p2> </p2>
+                <p1> </p1>
+                <p2> </p2>
+                <p1>   
+                    <br>
+                <p4>{{$postakun->created_at}}</p4>
+            </div>
+        </div>
+
+        <div class="togle">
+        <form action="/hapuspost/{{$postakun->id}}" method="POST">
+                      @csrf
+                      @method('DELETE')            
+                <div class="btn-ak">
+                    <button type="button" class="btn dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu">
+                        <button href='{{$postakun->id}}' class="dropdown-item" href="/hapuspost">Delete Post</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+            
+        <form action="/comment/{{$postakun->id}}" method="POST">
+        @csrf
+            <div id="commentboxpos2" class="post1">
+                <input type="text" placeholder="comment" id="commentbox" name="comment"/>
+            </div>
+
+            <div class = "commentkuy">
+                <button type="submit" class="btn btn-success btn-group-sm">></button>
+            </div>
+        </form>
+    </div>
+    @endforeach
+
+    @foreach ($profile2 as $postakun)
+    <div class="post1">
+        <img src="{{asset(Auth::user()->profile)}}" alt="profile is here"
             height="40" width="40" /><br>
         <img src="{{$postakun->post}}" alt="doc is here"
             height="400" width="565" /><br><br>

@@ -9,7 +9,7 @@
 
 @foreach ($post as $postakun)
     <div class="post1">
-        <img src="mini1.png" alt="profile is here"
+        <img src="{{$postakun->userkepost->profile}}" alt="profile is here"
             height="40" width="40" /><br>
         <img src="{{$postakun->post}}" alt="doc is here"
             height="400" width="565" /><br><br>

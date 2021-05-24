@@ -10,7 +10,7 @@
       <ul class="navbar-nav navbar-sidenav">
 
           <a class="nav-link navlogo text-center" href="/home">
-            <img src="https://www.sekalahita.id/assets/images/logo/logo.png">
+            <img src="{{asset(Auth::user()->profile)}}">
           </a>
 
         <li class="nav-item">
