@@ -13,7 +13,7 @@ class AuthController extends Controller
     //Login Page
     public function loginpage(){
 
-        return view('/');
+        return view('/auth');
     }
 
 
@@ -26,7 +26,7 @@ class AuthController extends Controller
            return redirect('/home');
         }
 
-        return redirect('/');
+        return redirect('/auth');
         
     }
 
