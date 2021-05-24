@@ -17,6 +17,7 @@ class CreatePostTable extends Migration
             $table->id();
             $table->string('id_user');
             $table->string('post');
+            $table->string('desc');
             $table->integer('like');
             $table->timestamps();
 
