@@ -18,8 +18,8 @@ class CreateCommentTable extends Migration
             $table->integer('id_user');
             $table->integer('id_post');
             $table->string('comment');
-            $table->integer('group');
             $table->timestamps();
+            $table->integer('group');
         });
     }
 
