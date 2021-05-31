@@ -84,7 +84,7 @@ Route::group(['middleware' => 'auth'], function (){
 
 
 //Auth
-Route::get('/auth', [AuthController::class, 'loginpage']);
+Route::get('/', [AuthController::class, 'loginpage']);
 
 Route::post('/login', [AuthController::class, 'login']);
 
